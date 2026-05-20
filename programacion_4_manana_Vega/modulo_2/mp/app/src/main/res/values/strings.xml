@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Expediente Policial</string>
+    <string name="officials">Oficiales</string>
+    <string name="evidence">Evidencias</string>
+    <string name="profile">Perfil</string>
+</resources>
