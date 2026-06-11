@@ -1,4 +1,3 @@
-// data/remote/api/UserApi.kt
 package com.shopapp.data.remote.api
 
 import com.shopapp.data.remote.dto.*
@@ -33,11 +32,15 @@ interface UserApi {
     @POST("users/{id}/toggle-active/")
     suspend fun toggleActive(@Path("id") id: Int): Response<ToggleActiveResponseDto>
 
+    @GET("users/profile/")
+    suspend fun getProfile(): Response<UserDto>
+
+    @GET("users/stats/")
+    suspend fun getStats(): Response<UserStatsDto>
 
     @Multipart
     @PATCH("users/profile/")
     suspend fun uploadAvatar(
         @Part avatar: MultipartBody.Part,
     ): Response<UserDto>
-
 }

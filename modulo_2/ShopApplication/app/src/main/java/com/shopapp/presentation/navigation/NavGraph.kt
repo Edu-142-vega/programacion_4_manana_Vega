@@ -4,14 +4,12 @@ package com.shopapp.presentation.navigation
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.*
 import com.shopapp.presentation.components.LoadingScreen
-import com.shopapp.presentation.ui.admin.AdminScaffold
+import com.shopapp.presentation.ui.admin.dashboard.AdminScaffold
 import com.shopapp.presentation.ui.admin.categories.CategoriesAdminScreen
 import com.shopapp.presentation.ui.admin.dashboard.DashboardScreen
 import com.shopapp.presentation.ui.admin.orders.OrderAdminDetailScreen
@@ -31,7 +29,6 @@ import com.shopapp.presentation.viewmodel.AuthViewModel
 import com.shopapp.presentation.viewmodel.CartViewModel
 import com.shopapp.presentation.viewmodel.OrdersAdminViewModel
 import com.shopapp.theme.Surface
-import com.shopapp.theme.TextSecondary
 
 @Composable
 fun NavGraph(
@@ -198,8 +195,8 @@ fun NavGraph(
                     }
                 } else {
                     ProfileScreen(
-                        authViewModel = authViewModel,
                         onLogout = {
+                            authViewModel.logout()
                             navController.navigate(Screen.Login.route) {
                                 popUpTo(0) { inclusive = true }
                             }
@@ -419,4 +416,3 @@ fun NavGraph(
         }
     }
 }
-

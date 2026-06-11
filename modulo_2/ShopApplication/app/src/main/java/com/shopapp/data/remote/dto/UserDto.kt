@@ -50,7 +50,6 @@ fun UserDto.toDomain() = User(
     lastName   = lastName,
     isStaff    = isStaff,
     isActive   = isActive,
-    dateJoined = dateJoined,
     numOrders  = numOrders,
     avatarUrl = avatarUrl,
 )
