@@ -2,6 +2,7 @@
 package com.shopapp.data.remote.api
 
 import com.shopapp.data.remote.dto.*
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -32,9 +33,11 @@ interface UserApi {
     @POST("users/{id}/toggle-active/")
     suspend fun toggleActive(@Path("id") id: Int): Response<ToggleActiveResponseDto>
 
-    @GET("users/profile/")
-    suspend fun getProfile(): Response<UserDto>
 
-    @GET("users/stats/")
-    suspend fun getStats(): Response<UserStatsDto>
+    @Multipart
+    @PATCH("users/profile/")
+    suspend fun uploadAvatar(
+        @Part avatar: MultipartBody.Part,
+    ): Response<UserDto>
+
 }
