@@ -4,7 +4,7 @@ class ServidorSSH {
   final String nombre;
   final String ip;
   final int    puerto;
-  final bool   ssl;
+  final bool   ssdl;
   bool         favorito;
 
   ServidorSSH({
@@ -12,7 +12,7 @@ class ServidorSSH {
     required this.nombre,
     required this.ip,
     required this.puerto,
-    required this.ssl,
+    required this.ssdl,
     this.favorito = false,
   });
 }
