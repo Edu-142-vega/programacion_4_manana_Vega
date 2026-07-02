@@ -1,8 +1,13 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modulo11_gorouter/providers/auth_provider.dart';
 import 'package:modulo11_gorouter/router/app_router_paso2.dart';
-import 'package:modulo11_gorouter/router/approuterpaso2.dart';
+import 'package:modulo11_gorouter/router/app_router_paso3.dart';
+import 'package:modulo11_gorouter/router/app_router_paso4.dart';
+import 'package:modulo11_gorouter/router/app_router_paso5.dart';
+
+
 
 // ┌──────────────────────────────────────────────────────────────────┐
 // │  Cambia este número y guarda (Ctrl+S) para navegar entre pasos. │
@@ -12,7 +17,7 @@ import 'package:modulo11_gorouter/router/approuterpaso2.dart';
 // │  4  Paso 4  ShellRoute completo + NavigationBar persistente     │
 // │  5  Paso 5  Guard redirect + pantalla de login + Riverpod       │
 // └──────────────────────────────────────────────────────────────────┘
-const int paso = 2;
+const int paso = 5;
 
 void main() {
   runApp(
@@ -22,20 +27,24 @@ void main() {
   );
 }
 
-class AppMonitoreo extends StatelessWidget {
+// Para el paso 5, AppMonitoreo es ConsumerWidget (accede al ref para el router)
+class AppMonitoreo extends ConsumerWidget {
   final int paso;
   const AppMonitoreo({super.key, required this.paso});
-  
-  Object? get appRouter => null;
+
+  RouterConfig<Object> get appRouter => appRouterPaso2;
 
   @override
-  Widget build(BuildContext context) {
-    final router = switch (paso) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Observamos el estado de auth para que el router se regenere al cambiar
+    ref.watch(authProvider);
+
+    final RouterConfig<Object> router = switch (paso) {
       1 => appRouter,
       2 => appRouterPaso2,
-      //3 => appRouterPaso3,
-      //4 => appRouterPaso4,
-      //5 => appRouterPaso5(context),
+      3 => appRouterPaso3,
+      4 => appRouterPaso4,
+      5 => appRouterPaso5(ref),
       _ => appRouter,
     };
 

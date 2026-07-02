@@ -13,7 +13,10 @@ class PantallaDetalle extends StatelessWidget {
   Widget build(BuildContext context) {
     // Si no viene por extras, buscar en la lista simulada
     final srv = servidor ??
-        servidoresSimulados.where((s) => s.id == id).firstOrNull;
+        servidoresSimulados.where((s) => s.id == id).cast<ServidorSSH?>().firstWhere(
+          (s) => s?.id == id,
+          orElse: () => null,
+        );
 
     final cs = Theme.of(context).colorScheme;
 
