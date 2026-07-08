@@ -71,6 +71,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 8),
               Text('Inicia sesión en tu cuenta', style: tt.bodyMedium),
               const SizedBox(height: 48),
+              const SizedBox(height: 8),
+              TextButton(
+                onPressed: () => context.push('/forgot-password'),
+                child:     const Text('¿Olvidaste tu contraseña?'),
+              ),
 
               // Card del formulario
               Container(
