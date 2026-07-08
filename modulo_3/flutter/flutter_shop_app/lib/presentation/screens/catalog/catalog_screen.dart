@@ -1,13 +1,12 @@
 // lib/presentation/screens/catalog/catalog_screen.dart — versión M5
 
-import 'package:flutter/material.dart' hide SearchBar;
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../theme/app_colors.dart';
 import '../../providers/catalog_provider.dart';
 import '../../widgets/product_card.dart';
 import '../../widgets/filters_sheet.dart';
-import '../../widgets/search_bar.dart';
 
 class CatalogScreen extends ConsumerStatefulWidget {
   const CatalogScreen({super.key});
@@ -18,10 +17,12 @@ class CatalogScreen extends ConsumerStatefulWidget {
 
 class _CatalogScreenState extends ConsumerState<CatalogScreen> {
   final _scrollController = ScrollController();
+  final _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    _searchController.text = ref.read(catalogProvider).search!;
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 200) {
@@ -32,6 +33,7 @@ class _CatalogScreenState extends ConsumerState<CatalogScreen> {
 
   @override
   void dispose() {
+    _searchController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -59,6 +61,9 @@ class _CatalogScreenState extends ConsumerState<CatalogScreen> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(catalogProvider);
+    if (_searchController.text != state.search) {
+      _searchController.text = state.search!;
+    }
     final numFilters = _countActiveFilters(state);
 
     if (state.isLoading && state.products.isEmpty) {
@@ -98,7 +103,7 @@ class _CatalogScreenState extends ConsumerState<CatalogScreen> {
                 children: [
                   Expanded(
                     child: SearchBar(
-                      initialValue: state.search,
+                      controller: _searchController,
                       onChanged: (q) => ref.read(catalogProvider.notifier).setSearch(q),
                     ),
                   ),
