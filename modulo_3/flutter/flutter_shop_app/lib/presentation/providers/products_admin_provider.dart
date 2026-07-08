@@ -1,4 +1,4 @@
-// lib/presentation/providers/categoriesAdminProvider.dart
+// lib/presentation/providers/products_admin_provider.dart
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/remote/api/product_remote_datasource.dart';
