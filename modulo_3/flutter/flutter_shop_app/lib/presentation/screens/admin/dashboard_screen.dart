@@ -396,11 +396,17 @@ class _SectionCard extends StatelessWidget {
 // ignore: unused_element
 class _AdminPlaceholder extends StatelessWidget {
   final String title;
+
   const _AdminPlaceholder(this.title);
 
   @override
   Widget build(BuildContext context) => Center(
-        child: Text(title,
-            style: const TextStyle(color: Color(0xFF8888AA), fontSize: 16)),
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Color(0xFF8888AA),
+            fontSize: 16,
+          ),
+        ),
       );
 }
